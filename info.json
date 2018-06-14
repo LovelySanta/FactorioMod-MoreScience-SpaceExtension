@@ -1,0 +1,13 @@
+{
+  "name": "MoreScience-SpaceExtension",
+  "version": "0.1.0",
+  "factorio_version": "0.16",
+  "title": "More Science - Space Extension",
+  "author": "lovely_santa",
+  "homepage": "https://mods.factorio.com/mod/MoreScience-BobAngelsExtension",
+  "description": "An extension to the space extension mod: Change the way science is beiing made.",
+  "dependencies": [
+    "MoreScience >= 0.1.9",
+    "SpaceMod"
+  ]
+}
