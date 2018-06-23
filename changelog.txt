@@ -1,0 +1,5 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0 - Initial release
+Date: 23. 6. 2018
+  Major Features:
+    - Added initial support for Space Extension Mod
