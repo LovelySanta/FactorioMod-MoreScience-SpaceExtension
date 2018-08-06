@@ -42,3 +42,40 @@ for _, spaceshipItemTable in pairs({
 
   end
 end
+
+
+
+-- if bobs mod is present, change logistics science pack over
+if mods['boblibrary'] and
+  mods['bobplates'] and
+  mods['bobmodules'] and
+  mods['bobelectronics'] and
+  mods['boblogistics'] and
+  mods['bobtech'] and
+  mods['bobwarfare'] and
+  data.raw.recipe["advanced-processing-unit"] then
+
+    -- Change technology over to infused science
+    MoreScience.lib.technology.addPrerequisite("space-assembly", "infused-basic-logistics-science-research")
+    MoreScience.infusedScience.changeToInfusedSciencePack("ftl-theory-D", {})
+
+    for _, techName in pairs({
+      "space-assembly",
+      "space-construction",
+      "space-casings",
+      "space-thrusters",
+      "protection-fields",
+      "fuel-cells",
+      "habitation",
+      "life-support-systems",
+      "spaceship-command",
+      "astrometrics",
+      "fusion-reactor",
+      "ftl-theory-D",
+      "ftl-propulsion",
+    }) do
+      MoreScience.lib.technology.removeIngredient(techName, "logistic-science-pack")
+      MoreScience.lib.technology.addIngredient(techName, 1, "infused-basic-logistics-science-pack")
+    end
+
+end
