@@ -1,6 +1,6 @@
 {
   "name": "MoreScience-SpaceExtension",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "factorio_version": "0.17",
   "title": "More Science - Space Extension",
   "author": "lovely_santa",
@@ -8,7 +8,7 @@
   "homepage": "https://mods.factorio.com/mod/MoreScience-SpaceExtension",
   "description": "An extension to the space extension mod: Change the way science is being made.",
   "dependencies": [
-    "MoreScience >= 0.2.2",
-    "SpaceMod >= 0.4.1"
+    "MoreScience >= 0.2.8",
+    "SpaceMod >= 0.4.4"
   ]
 }

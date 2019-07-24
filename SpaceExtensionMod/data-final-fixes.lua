@@ -1,3 +1,4 @@
+local scienceNames = require("prototypes/settings").scienceNames
 
 -- Add new subgroup for the items
 local spaceshipConstructionSubgroup =
@@ -45,37 +46,69 @@ end
 
 
 
+
 -- if bobs mod is present, change logistics science pack over
-if mods['boblibrary'] and
-  mods['bobplates'] and
-  mods['bobmodules'] and
-  mods['bobelectronics'] and
-  mods['boblogistics'] and
-  mods['bobtech'] and
-  mods['bobwarfare'] and
-  data.raw.recipe["advanced-processing-unit"] then
+  if data.raw.technology["ftl-theory-D"] then
 
-    -- Change technology over to infused science
-    MoreScience.lib.technology.addPrerequisite("space-assembly", "infused-basic-logistics-science-research")
-    MoreScience.infusedScience.changeToInfusedSciencePack("ftl-theory-D", {})
-
-    for _, techName in pairs({
-      "space-assembly",
-      "space-construction",
-      "space-casings",
-      "space-thrusters",
-      "protection-fields",
-      "fuel-cells",
-      "habitation",
-      "life-support-systems",
-      "spaceship-command",
-      "astrometrics",
-      "fusion-reactor",
-      "ftl-theory-D",
-      "ftl-propulsion",
-    }) do
-      MoreScience.lib.technology.removeIngredient(techName, "logistic-science-pack")
-      MoreScience.lib.technology.addIngredient(techName, 1, "infused-basic-logistics-science-pack")
+  -- Change technology over to infused science
+  for techName, ingredientChanges in pairs{
+    ["space-assembly"] = {
+      changeToInfused = {"pink"},
+    },
+    ["space-construction"] = {
+      changeToInfused = {"pink"},
+    },
+  
+    ["space-casings"] = {
+      changeToInfused = {"pink"},
+    },
+    ["space-thrusters"] = {
+      changeToInfused = {"pink"},
+    },
+    ["protection-fields"] = {
+      changeToInfused = {"pink"},
+    },
+    ["fuel-cells"] = {
+      changeToInfused = {"pink"},
+    },
+    ["habitation"] = {
+      changeToInfused = {"pink"},
+    },
+    ["life-support-systems"] = {
+      changeToInfused = {"pink"},
+    },
+    ["spaceship-command"] = {
+      changeToInfused = {"pink"},
+    },
+    ["astrometrics"] = {
+      changeToInfused = {"pink"},
+    },
+    ["fusion-reactor"] = {
+      changeToInfused = {"pink"},
+    },
+  
+    ["ftl-theory-D"] = {
+      changeToInfused = {"red", "green", "blue", "pink"},
+      addInfused      = {"orange" ,"cyan"},
+    },
+    ["ftl-propulsion"] = {
+      changeToInfused = {"pink"},
+    },
+  } do
+    if data.raw["technology"][techName] then
+      for _, color in pairs(ingredientChanges.removeRegular   or {}) do
+        LSlib.technology.removeIngredient(techName,               string.format(scienceNames[color], "pack"))
+      end
+      for _, color in pairs(ingredientChanges.changeToInfused or {}) do
+        LSlib.technology.addIngredient   (techName, 1, "infused-"..string.format(scienceNames[color], "pack"))
+        LSlib.technology.removeIngredient(techName,                string.format(scienceNames[color], "pack"))
+      end
+      for _, color in pairs(ingredientChanges.addInfused      or {}) do
+        LSlib.technology.addIngredient   (techName, 1, "infused-"..string.format(scienceNames[color], "pack"))
+      end
+      for _, color in pairs(ingredientChanges.prerequisites   or {}) do
+        LSlib.technology.addPrerequisite(techName,     "infused-"..string.format(scienceNames[color], "pack"))
+      end
     end
-
+  end
 end

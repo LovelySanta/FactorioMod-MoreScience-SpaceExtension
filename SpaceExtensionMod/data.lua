@@ -86,22 +86,25 @@ for techName, ingredientChanges in pairs{
     prerequisites   = {"yellow"},
   },
   ["ftl-propulsion"] = {
+    removeRegular   = {"pink"},
     changeToInfused = {"red", "green", "blue", "purple", "yellow", "white"},
     addInfused      = {"orange" ,"cyan", "gray"},
     prerequisites   = {"gray"},
   },
 } do
-  for _, color in pairs(ingredientChanges.removeRegular   or {}) do
-    LSlib.technology.removeIngredient(techName,               string.format(scienceNames[color], "pack"))
-  end
-  for _, color in pairs(ingredientChanges.changeToInfused or {}) do
-    LSlib.technology.addIngredient   (techName, 1, "infused-"..string.format(scienceNames[color], "pack"))
-    LSlib.technology.removeIngredient(techName,               string.format(scienceNames[color], "pack"))
-  end
-  for _, color in pairs(ingredientChanges.addInfused      or {}) do
-    LSlib.technology.addIngredient   (techName, 1, "infused-"..string.format(scienceNames[color], "pack"))
-  end
-  for _, color in pairs(ingredientChanges.prerequisites   or {}) do
-    LSlib.technology.addPrerequisite(techName,     "infused-"..string.format(scienceNames[color], "pack"))
+  if data.raw["technology"][techName] then
+    for _, color in pairs(ingredientChanges.removeRegular   or {}) do
+      LSlib.technology.removeIngredient(techName,               string.format(scienceNames[color], "pack"))
+    end
+    for _, color in pairs(ingredientChanges.changeToInfused or {}) do
+      LSlib.technology.addIngredient   (techName, 1, "infused-"..string.format(scienceNames[color], "pack"))
+      LSlib.technology.removeIngredient(techName,                string.format(scienceNames[color], "pack"))
+    end
+    for _, color in pairs(ingredientChanges.addInfused      or {}) do
+      LSlib.technology.addIngredient   (techName, 1, "infused-"..string.format(scienceNames[color], "pack"))
+    end
+    for _, color in pairs(ingredientChanges.prerequisites   or {}) do
+      LSlib.technology.addPrerequisite(techName,     "infused-"..string.format(scienceNames[color], "pack"))
+    end
   end
 end
