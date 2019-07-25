@@ -1,5 +1,4 @@
 local scienceNames = require("prototypes/settings").scienceNames
-LSlib.utils.log.enable()
 
 -- Change technology over to infused science
 for techName, ingredientChanges in pairs{
